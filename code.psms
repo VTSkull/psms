@@ -1,0 +1,12 @@
+mvt 5 3
+push
+mvt 5 3
+push
+mvt 0 3
+pop
+regmv 3 0
+pop
+regmv 3 1
+add
+regmv 2 1
+add
