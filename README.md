@@ -13,6 +13,14 @@ Usage:
 `mvt <value> <register>`
 
 ---
+### mvm
+Moves a value from memory into a register
+
+Usage:
+
+`mvm <index> <register>`
+
+---
 ### mvf
 Moves a value from a register into program memory
 
@@ -158,3 +166,11 @@ Usage:
 `:<label_name>`
 
 `jmp :<label_name>`
+
+---
+### mem
+creates blank bytes for length then jumps over them
+
+Usage:
+
+`mem <length>`
