@@ -11,6 +11,7 @@ class program:
     def __init__(self):
         self.binary = "program.psm"
         self.program = "code.psms"
+        self.precompiled = []
         self.compiled = b""
 
 
@@ -20,11 +21,16 @@ class program:
             file.close()
 
         code = code.split("\n")
+        labels = {}
+        labelJumps = {}
         #compiled = b""
 
+        def finalCompile():
+            for x in self.precompiled:
+                self.compiled += int(x).to_bytes(1, "big")
 
         def append(number):
-            self.compiled += number.to_bytes(1, "big")
+            self.precompiled.append(number)
 
 
         for line in range(len(code)):
@@ -98,36 +104,76 @@ class program:
 
             # jump
             elif x[0] == "jmp":
-                index = intLimit(int(x[1]))
                 append(14)
-                append(index)
+                if x[1][0] == ":":
+                    index = x[1]
+                    append(0)
+                    labelJumps[index] = len(self.precompiled)-1
+                else:
+                    index = intLimit(int(x[1]))
+                    append(index)
 
             # jump if equal
             elif x[0] == "jmpe":
-                index = intLimit(int(x[1]))
                 append(15)
-                append(index)
+                if x[1][0] == ":":
+                    index = x[1]
+                    append(0)
+                    labelJumps[index] = len(self.precompiled)-1
+                else:
+                    index = intLimit(int(x[1]))
+                    append(index)
 
             # jump if not equal
             elif x[0] == "jmpne":
-                index = intLimit(int(x[1]))
                 append(16)
-                append(index)
+                if x[1][0] == ":":
+                    index = x[1]
+                    append(0)
+                    labelJumps[index] = len(self.precompiled)-1
+                else:
+                    index = intLimit(int(x[1]))
+                    append(index)
 
             # jump if less than
             elif x[0] == "jmpl":
-                index = intLimit(int(x[1]))
                 append(17)
-                append(index)
+                if x[1][0] == ":":
+                    index = x[1]
+                    append(0)
+                    labelJumps[index] = len(self.precompiled)-1
+                else:
+                    index = intLimit(int(x[1]))
+                    append(index)
 
             # jump if greater than
             elif x[0] == "jmpg":
-                index = intLimit(int(x[1]))
                 append(18)
-                append(index)
+                if x[1][0] == ":":
+                    index = x[1]
+                    append(0)
+                    labelJumps[index] = len(self.precompiled)-1
+                else:
+                    index = intLimit(int(x[1]))
+                    append(index)
 
+            # label
+            elif x[0][0] == ":":
+                if len(self.precompiled) == 0:
+                    labels[x[0]] = len(self.precompiled)
+                else:
+                    labels[x[0]] = len(self.precompiled) - 1
+
+
+        for y in labelJumps:
+            goto = labels[y]
+            self.precompiled[labelJumps[y]] = goto
+
+        print(self.precompiled)
+        finalCompile()
         print(self.compiled)
-
+        #print(labels)
+        #print(labelJumps)
         with open(self.binary, "wb") as file:
             file.write(self.compiled)
 

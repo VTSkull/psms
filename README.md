@@ -9,6 +9,7 @@ psm(python assembly) is a machine-code-like language I made in a day. psm has 4 
 Moves a value to a register.
 
 Usage:
+
 `mvt <value> <register>`
 
 ---
@@ -16,6 +17,7 @@ Usage:
 Moves a value from a register into program memory
 
 Usage:
+
 `mvf <register> <index>`
 
 ---
@@ -23,6 +25,7 @@ Usage:
 Moves a value from one register to another
 
 Usage:
+
 `regmv <register_from> <register_to>`
 
 ---
@@ -30,6 +33,7 @@ Usage:
 Adds the number in register 0 with register 1 and returns it to register 2
 
 Usage:
+
 `add`
 
 ---
@@ -37,6 +41,7 @@ Usage:
 Subtracts the number in register 0 with register 1 and returns it to register 2
 
 Usage:
+
 `sub`
 
 ---
@@ -44,6 +49,7 @@ Usage:
 Multiplies the number in register 0 with register 1 and returns it to register 2
 
 Usage:
+
 `mult`
 
 ---
@@ -51,6 +57,7 @@ Usage:
 Divides the number in register 0 with register 1 and returns it to register 2
 
 Usage:
+
 `div`
 
 ---
@@ -58,6 +65,7 @@ Usage:
 Does bitwise and on the value in register 0 and register 1 and returns it to register 2
 
 Usage:
+
 `and`
 
 ---
@@ -65,6 +73,7 @@ Usage:
 Does bitwise nand on the value in register 0 and register 1 and returns it to register 2
 
 Usage:
+
 `nand`
 
 ---
@@ -73,6 +82,7 @@ Usage:
 Does bitwise or on the value in register 0 and register 1 and returns it to register 2
 
 Usage:
+
 `or`
 
 ---
@@ -80,6 +90,7 @@ Usage:
 Does bitwise xor on the value in register 0 and register 1 and returns it to register 2
 
 Usage:
+
 `xor`
 
 ---
@@ -87,6 +98,7 @@ Usage:
 Pushes the value in register 3 to the stack
 
 Usage:
+
 `push`
 
 ---
@@ -94,6 +106,7 @@ Usage:
 Pops the value of the top of the stack and returns it to register 3
 
 Usage:
+
 `pop`
 
 ---
@@ -101,6 +114,7 @@ Usage:
 Jumps to the index specified in the parameter
 
 Usage:
+
 `jmp <index>`
 
 ---
@@ -108,6 +122,7 @@ Usage:
 Jumps to the index specified in the parameter if the value in register 0 and register 1 are equal
 
 Usage:
+
 `jmpe <index>`
 
 ---
@@ -115,6 +130,7 @@ Usage:
 Jumps to the index specified in the parameter if the value in register 0 and register 1 are not equal
 
 Usage:
+
 `jmpn <index>`
 
 ---
@@ -122,6 +138,7 @@ Usage:
 Jumps to the index specified in the parameter if the value in register 0 is less than the value in register 1
 
 Usage:
+
 `jmpl <index>`
 
 ---
@@ -129,4 +146,15 @@ Usage:
 Jumps to the index specified in the parameter if the value in register 0 is greater than the value in register 1
 
 Usage:
+
 `jmpg <index>`
+
+---
+### label
+Defines a label to jump to. Can be used in a jump instruction as the index
+
+Usage:
+
+`:<label_name>`
+
+`jmp :<label_name>`

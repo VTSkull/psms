@@ -1,12 +1,8 @@
-mvt 5 3
-push
-mvt 5 3
-push
-mvt 0 3
-pop
-regmv 3 0
-pop
-regmv 3 1
+jmp :abcd
+mvt 1 0
+mvt 1 1
 add
-regmv 2 1
+:abcd
+mvt 2 0
+mvt 2 1
 add
