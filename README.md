@@ -7,54 +7,63 @@ psm(python assembly) is a machine-code-like language I made in a day. psm has 4 
 
 ### mvt
 Moves a value to a register.
+
 Usage:
 `mvt <value> <register>`
 
 ---
 ### mvf
 Moves a value from a register into program memory
+
 Usage:
 `mvf <register> <index>`
 
 ---
 ### regmv
 Moves a value from one register to another
+
 Usage:
 `regmv <register_from> <register_to>`
 
 ---
 ### add
 Adds the number in register 0 with register 1 and returns it to register 2
+
 Usage:
 `add`
 
 ---
 ### sub
 Subtracts the number in register 0 with register 1 and returns it to register 2
+
 Usage:
 `sub`
 
 ---
 ### mult
 Multiplies the number in register 0 with register 1 and returns it to register 2
+
 Usage:
 `mult`
 
 ---
 ### div
 Divides the number in register 0 with register 1 and returns it to register 2
+
 Usage:
 `div`
 
 ---
 ### and
 Does bitwise and on the value in register 0 and register 1 and returns it to register 2
+
 Usage:
 `and`
 
 ---
 ### nand
 Does bitwise nand on the value in register 0 and register 1 and returns it to register 2
+
 Usage:
 `nand`
 
@@ -62,23 +71,62 @@ Usage:
 ### or
 
 Does bitwise or on the value in register 0 and register 1 and returns it to register 2
+
 Usage:
 `or`
 
 ---
 ### xor
 Does bitwise xor on the value in register 0 and register 1 and returns it to register 2
+
 Usage:
 `xor`
 
 ---
 ### push
 Pushes the value in register 3 to the stack
+
 Usage:
 `push`
 
 ---
 ### pop
 Pops the value of the top of the stack and returns it to register 3
+
 Usage:
 `pop`
+
+---
+### jmp
+Jumps to the index specified in the parameter
+
+Usage:
+`jmp <index>`
+
+---
+### jmpe
+Jumps to the index specified in the parameter if the value in register 0 and register 1 are equal
+
+Usage:
+`jmpe <index>`
+
+---
+### jmpn
+Jumps to the index specified in the parameter if the value in register 0 and register 1 are not equal
+
+Usage:
+`jmpn <index>`
+
+---
+### jmpl
+Jumps to the index specified in the parameter if the value in register 0 is less than the value in register 1
+
+Usage:
+`jmpl <index>`
+
+---
+### jmpg
+Jumps to the index specified in the parameter if the value in register 0 is greater than the value in register 1
+
+Usage:
+`jmpg <index>`
