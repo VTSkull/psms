@@ -1,11 +1,39 @@
+import sys
+
 def intLimit(number):
     return number % 256
 
 def regCheck(number, line):
-    if number > 3:
+    if number > 5:
         raise ValueError(f"""Invalid register number "{number}" on line {line}""")
     else:
         return number
+
+
+#register class
+class NewRegister:
+    def __init__(self):
+        self.value = 0
+
+    def write(self, value):
+        self.value = value
+    
+    def read(self):
+        return self.value
+    
+
+#stdout register class
+class stdoutReg:
+    def __init__(self):
+        self.value = 0
+    
+    def write(self, value):
+        sys.stdout.write(chr(value))
+        self.value = value
+
+    def read(self):
+        return self.value
+
 
 class program:
     def __init__(self):
@@ -199,30 +227,34 @@ class program:
             file.close()
 
         #print(memory)
-        reg = [0, 0, 0, 0]
+        reg = [NewRegister(), NewRegister(), NewRegister(), NewRegister(), stdoutReg()]
         stack = []
         memoryList = list(memory)
 
 
         index = 0
         while index <= len(memoryList) - 1:
-
-            print(f"registers: {reg}")
-            print(f"stack: {stack}")
-            print(f"index: {index}")
+            regValues = []
+            for x in reg:
+                regValues.append(x.read())
+            
+            if self.debug:
+                print(f"registers: {regValues}")
+                print(f"stack: {stack}")
+                print(f"index: {index}")
 
             # move to register: 00000001
             if memoryList[index] == 1:
                 value = intLimit(memoryList[index + 1])
                 register = memoryList[index + 2]
-                reg[register] = value
+                reg[register].write(value)
                 index += 2
 
             # move from memory to register: 00000010
             elif memoryList[index] == 2:
                 value = memoryList[memoryList[index + 1]]
                 register = memoryList[index + 2]
-                reg[register] = value
+                reg[register].write(value)
                 index += 2
 
 
@@ -230,57 +262,57 @@ class program:
             elif memoryList[index] == 3:
                 register = memoryList[index + 1]
                 i = memoryList[index + 2]
-                memoryList[i] = reg[register]
+                memoryList[i] = reg[register].read()
                 index += 2
 
             # move from one register to another: 00000100
             elif memoryList[index] == 4:
                 registerFrom = memoryList[index + 1]
                 registerTo = memoryList[index + 2]
-                reg[registerTo] = reg[registerFrom]
-                reg[registerFrom] = 0
+                reg[registerTo].write(reg[registerFrom].read())
+                reg[registerFrom].write(0)
                 index += 2
 
             # add: 00000101
             elif memoryList[index] == 5:
-                reg[2] = intLimit(reg[0] + reg[1])
+                reg[2].write(intLimit(reg[0].read() + reg[1].read()))
 
             # subtract: 00000110
             elif memoryList[index] == 6:
-                reg[2] = intLimit(reg[0] - reg[1])
+                reg[2].write(intLimit(reg[0].read() - reg[1].read()))
 
             # multiply: 00000111
             elif memoryList[index] == 7:
-                reg[2] = intLimit(reg[0] * reg[1])
+                reg[2].write(intLimit(reg[0].read() * reg[1].read()))
 
             # divide: 00001000
             elif memoryList[index] == 8:
-                reg[2] = intLimit(reg[0] // reg[1])
+                reg[2].write(intLimit(reg[0].read() // reg[1].read()))
 
             # and: 00001001
             elif memoryList[index] == 9:
-                reg[2] = reg[0] & reg[1]
+                reg[2].write(reg[0].read() & reg[1].read())
 
             # nand: 00001010
             elif memoryList[index] == 10:
-                reg[2] = reg[0] & reg[1]
-                reg[2] = ~ reg[2]
+                reg[2].write(reg[0].read() & reg[1].read())
+                reg[2].write(~ reg[2].read())
 
             # or: 00001011
             elif memoryList[index] == 11:
-                reg[2] = reg[0] | reg[1]
+                reg[2].write(reg[0].read() | reg[1].read())
 
             # xor: 00001100
             elif memoryList[index] == 12:
-                reg[2] = reg[0] ^ reg[1]
+                reg[2].write(reg[0].read() ^ reg[1].read())
 
             # push: 00001101
             elif memoryList[index] == 13:
-                stack.append(reg[3])
+                stack.append(reg[3].read())
 
             # pop: 00001110
             elif memoryList[index] == 14:
-                reg[3] = stack.pop(len(stack)-1)
+                reg[3].write(stack.pop(len(stack)-1))
 
             # jump: 00001111
             elif memoryList[index] == 15:
@@ -288,36 +320,37 @@ class program:
 
             # jump if equal: 00010000
             elif memoryList[index] == 16:
-                if reg[0] == reg[1]:
+                if reg[0].read() == reg[1].read():
                     index = memoryList[index + 1]
                 else:
                     index += 1
 
             # jump if not equal: 00010001
             elif memoryList[index] == 17:
-                if reg[0] != reg[1]:
+                if reg[0].read()!= reg[1].read():
                     index = memoryList[index + 1]
                 else:
                     index += 1
 
             # jump if less than: 00010001
             elif memoryList[index] == 18:
-                if reg[0] < reg[1]:
+                if reg[0].read() < reg[1].read():
                     index = memoryList[index + 1]
                 else:
                     index += 1
 
             # jump if greater than: 
             elif memoryList[index] == 19:
-                if reg[0] > reg[1]:
+                if reg[0].read() > reg[1].read():
                     index = memoryList[index + 1]
                 else:
                     index += 1
 
             index += 1
 
-            
-        print(f"memory: {memoryList}")
+        if self.debug:
+            print(f"memory: {memoryList}")
+
 
 run = program()
 run.compile()

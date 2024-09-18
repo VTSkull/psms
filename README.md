@@ -1,7 +1,7 @@
 # Docs:
 
 ## Basic info
-psm(python assembly) is a machine-code-like language I made in a day. psm has 4 addresses that range from 0 to 3. psms(python assembly script) is a assembly-like language that gets compiled into psm. This is the documentation for psms
+psm(python assembly) is a machine-code-like language I made in a day. psm has 5 registers that range from 0 to 4. register 4 is used for writing to stdout. psms(python assembly script) is a assembly-like language that gets compiled into psm. This is the documentation for psms
 
 ## Instructions:
 
