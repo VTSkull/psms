@@ -1,7 +1,7 @@
 # Docs:
 
 ## Basic info
-psm(python assembly) is a machine-code-like language I made in a day. psm has 5 registers that range from 0 to 4. register 4 is used for writing to stdout. psms(python assembly script) is a assembly-like language that gets compiled into psm. This is the documentation for psms
+psm(python assembly) is a machine-code-like language I made in a day. psm has 6 registers that range from 0 to 5. register 0 is used for writing to stdout and register 1 is used for reading stdin. psms(python assembly script) is a assembly-like language that gets compiled into psm. This is the documentation for psms
 
 ## Instructions:
 
@@ -38,7 +38,7 @@ Usage:
 
 ---
 ### add
-Adds the number in register 0 with register 1 and returns it to register 2
+Adds the number in register 2 with register 3 and returns it to register 4
 
 Usage:
 
@@ -46,7 +46,7 @@ Usage:
 
 ---
 ### sub
-Subtracts the number in register 0 with register 1 and returns it to register 2
+Subtracts the number in register 2 with register 3 and returns it to register 4
 
 Usage:
 
@@ -54,7 +54,7 @@ Usage:
 
 ---
 ### mult
-Multiplies the number in register 0 with register 1 and returns it to register 2
+Multiplies the number in register 2 with register 3 and returns it to register 4
 
 Usage:
 
@@ -62,7 +62,7 @@ Usage:
 
 ---
 ### div
-Divides the number in register 0 with register 1 and returns it to register 2
+Divides the number in register 2 with register 3 and returns it to register 4
 
 Usage:
 
@@ -70,7 +70,7 @@ Usage:
 
 ---
 ### and
-Does bitwise and on the value in register 0 and register 1 and returns it to register 2
+Does bitwise and on the value in register 2 and register 3 and returns it to register 4
 
 Usage:
 
@@ -78,7 +78,7 @@ Usage:
 
 ---
 ### nand
-Does bitwise nand on the value in register 0 and register 1 and returns it to register 2
+Does bitwise nand on the value in register 2 and register 3 and returns it to register 4
 
 Usage:
 
@@ -87,7 +87,7 @@ Usage:
 ---
 ### or
 
-Does bitwise or on the value in register 0 and register 1 and returns it to register 2
+Does bitwise or on the value in register 2 and register 3 and returns it to register 4
 
 Usage:
 
@@ -95,7 +95,7 @@ Usage:
 
 ---
 ### xor
-Does bitwise xor on the value in register 0 and register 1 and returns it to register 2
+Does bitwise xor on the value in register 2 and register 3 and returns it to register 4
 
 Usage:
 
@@ -103,7 +103,7 @@ Usage:
 
 ---
 ### push
-Pushes the value in register 3 to the stack
+Pushes the value in register 5 to the stack
 
 Usage:
 
@@ -111,7 +111,7 @@ Usage:
 
 ---
 ### pop
-Pops the value of the top of the stack and returns it to register 3
+Pops the value of the top of the stack and returns it to register 5
 
 Usage:
 
@@ -127,7 +127,7 @@ Usage:
 
 ---
 ### jmpe
-Jumps to the index specified in the parameter if the value in register 0 and register 1 are equal
+Jumps to the index specified in the parameter if the value in register 2 and register 3 are equal
 
 Usage:
 
@@ -135,7 +135,7 @@ Usage:
 
 ---
 ### jmpn
-Jumps to the index specified in the parameter if the value in register 0 and register 1 are not equal
+Jumps to the index specified in the parameter if the value in register 2 and register 3 are not equal
 
 Usage:
 
@@ -143,7 +143,7 @@ Usage:
 
 ---
 ### jmpl
-Jumps to the index specified in the parameter if the value in register 0 is less than the value in register 1
+Jumps to the index specified in the parameter if the value in register 2 is less than the value in register 3
 
 Usage:
 
@@ -151,7 +151,7 @@ Usage:
 
 ---
 ### jmpg
-Jumps to the index specified in the parameter if the value in register 0 is greater than the value in register 1
+Jumps to the index specified in the parameter if the value in register 2 is greater than the value in register 3
 
 Usage:
 

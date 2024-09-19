@@ -1,14 +1,18 @@
-mvt 104 4
-mvt 101 4
-mvt 108 4
-mvt 108 4
-mvt 111 4
-mvt 44 4
-mvt 32 4
-mvt 119 4
-mvt 111 4
-mvt 114 4
-mvt 108 4
-mvt 100 4
-mvt 33 4
-mvt 10 4
+:start
+mvt 104 0
+mvt 101 0
+mvt 108 0
+mvt 108 0
+mvt 111 0
+mvt 44 0
+mvt 32 0
+mvt 119 0
+mvt 111 0
+mvt 114 0
+mvt 108 0
+mvt 100 0
+mvt 33 0
+mvt 10 0
+
+regmv 1 0
+jmp :start
